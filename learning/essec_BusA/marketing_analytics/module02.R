@@ -86,6 +86,10 @@ customers_2015$segment[which(customers_2015$segment == "warm" & customers_2015$f
 customers_2015$segment[which(customers_2015$segment == "warm" & customers_2015$amount < 100)] = "warm low value"
 customers_2015$segment[which(customers_2015$segment == "warm" & customers_2015$amount >= 100)] = "warm high value"
 customers_2015$segment[which(customers_2015$segment == "active" & customers_2015$first_purchase <= 365)] = "new active"
+#FM new active high and low
+customers_2015$segment[which(customers_2015$segment == "new active" & customers_2015$amount < 100)] = "new active low value"
+customers_2015$segment[which(customers_2015$segment == "new active" & customers_2015$amount >= 100)] = "new active high value"
+
 customers_2015$segment[which(customers_2015$segment == "active" & customers_2015$amount < 100)] = "active low value"
 customers_2015$segment[which(customers_2015$segment == "active" & customers_2015$amount >= 100)] = "active high value"
 table(customers_2015$segment)
@@ -94,7 +98,7 @@ aggregate(x = customers_2015[, 2:5], by = list(customers_2015$segment), mean)
 # Re-order factor in a way that makes sense
 customers_2015$segment = factor(x = customers_2015$segment, levels = c("inactive", "cold",
                                                              "warm high value", "warm low value", "new warm",
-                                                             "active high value", "active low value", "new active"))
+                                                             "active high value", "active low value", "new active high value","new active low value"))
 table(customers_2015$segment)
 aggregate(x = customers_2015[, 2:5], by = list(customers_2015$segment), mean)
 
@@ -125,13 +129,17 @@ customers_2014$segment[which(customers_2014$segment == "warm" & customers_2014$f
 customers_2014$segment[which(customers_2014$segment == "warm" & customers_2014$amount < 100)] = "warm low value"
 customers_2014$segment[which(customers_2014$segment == "warm" & customers_2014$amount >= 100)] = "warm high value"
 customers_2014$segment[which(customers_2014$segment == "active" & customers_2014$first_purchase <= 365)] = "new active"
+#FM new active high and low
+customers_2014$segment[which(customers_2014$segment == "new active" & customers_2014$amount < 100)] = "new active low value"
+customers_2014$segment[which(customers_2014$segment == "new active" & customers_2014$amount >= 100)] = "new active high value"
+
 customers_2014$segment[which(customers_2014$segment == "active" & customers_2014$amount < 100)] = "active low value"
 customers_2014$segment[which(customers_2014$segment == "active" & customers_2014$amount >= 100)] = "active high value"
 
 # Re-order factor in a way that makes sense
 customers_2014$segment = factor(x = customers_2014$segment, levels = c("inactive", "cold",
                                                                        "warm high value", "warm low value", "new warm",
-                                                                       "active high value", "active low value", "new active"))
+                                                                       "active high value", "active low value", "new active high value", "new active low value"))
 
 # Show segmentation results
 table(customers_2014$segment)
